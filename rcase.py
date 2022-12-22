@@ -35,28 +35,28 @@ X_1 = np.column_stack((np.ones(40, dtype=float), X))
 tetta_hat_1 = np.linalg.inv(X_1.T @ X_1) @ X_1.T @ Y
 E_hat_1 = Y - X_1 @ tetta_hat_1
 alpha_1 = np.linalg.inv(X_1.T @ X_1)[1][1]
-T_Y = tetta_hat_1[1] / ((np.sqrt(alpha_1) * np.sqrt(E_hat_1.T @ E_hat_1))) * np.sqrt(38)
-print(abs(T_Y))
+T_Y1 = tetta_hat_1[1] / ((np.sqrt(alpha_1) * LA.norm(E_hat_1))) * np.sqrt(38)
+print(abs(T_Y1))
 
 X_2 = np.column_stack((np.ones(40, dtype=float), X, X ** 2))
 tetta_hat_2 = np.linalg.inv(X_2.T @ X_2) @ X_2.T @ Y
 E_hat_2 = Y - X_2 @ tetta_hat_2
 alpha_2 = np.linalg.inv(X_2.T @ X_2)[2][2]
-T_Y2 = tetta_hat_2[2] / ((np.sqrt(alpha_2) * np.sqrt(E_hat_2.T @ E_hat_2))) * np.sqrt(37)
+T_Y2 = tetta_hat_2[2] / ((np.sqrt(alpha_2) * LA.norm(E_hat_2))) * np.sqrt(37)
 print(abs(T_Y2))
 
 X_3 = np.column_stack((np.ones(40, dtype=float), X, X ** 2, X ** 3))
 tetta_hat_3 = np.linalg.inv(X_3.T @ X_3) @ X_3.T @ Y
 E_hat_3 = Y - X_3 @ tetta_hat_3
 alpha_3 = np.linalg.inv(X_3.T @ X_3)[3][3]
-T_Y3 = (tetta_hat_3[3]) / ((np.sqrt(alpha_3) * np.sqrt(E_hat_3.T @ E_hat_3))) * np.sqrt(36)
+T_Y3 = (tetta_hat_3[3]) / ((np.sqrt(alpha_3) * LA.norm(E_hat_3))) * np.sqrt(36)
 print(abs(T_Y3))
 
 X_4 = np.column_stack((np.ones(40, dtype=float), X, X ** 2, X ** 3, X ** 4))
 tetta_hat_4 = np.linalg.inv(X_4.T @ X_4) @ X_4.T @ Y
 E_hat_4 = Y - X_4 @ tetta_hat_4
 alpha_4 = np.linalg.inv(X_4.T @ X_4)[4][4]
-T_Y4 = (tetta_hat_4[4]) / ((np.sqrt(alpha_4) * np.sqrt(E_hat_4.T @ E_hat_4))) * np.sqrt(35)
+T_Y4 = (tetta_hat_4[4]) / ((np.sqrt(alpha_4) * LA.norm(E_hat_4))) * np.sqrt(35)
 print(abs(T_Y4))
 
 Norm_E_hat_2=LA.norm(E_hat_2)
