@@ -5,6 +5,8 @@ import scipy as sp
 from numpy import linalg as LA
 from math import sqrt
 from scipy.stats import t
+from scipy import stats
+from scipy.stats import chi2
 
 N = 12
 n = 40  # количество элементов
@@ -155,12 +157,21 @@ for i in range(l - 1):
     prev = edge
     edge += step
 
+p=[]
 t = np.array(t)
 n_vec = np.array(n_vec)
 p_hat = n_vec / n
-p = []
-for i in range(l - 1):
-    p.append(sp.stats.norm.cdf(t[i + 1] / sigma_hat_3_sq) - sp.stats.norm.cdf(t[i] / sigma_hat_3_sq))
-p = np.array(p)
-T_Z = (((p - p_hat) ** 2) / p).sum() * n
-print(T_Z)
+for i in range(l-1):
+    p.append(sp.stats.norm.cdf(t[i+1]/sigma_hat_3_sq) - sp.stats.norm.cdf(t[i]/sigma_hat_3_sq))
+
+
+chi, nechi=chi2.interval(0.05, l)
+K=0
+for i in range(l-1):
+    K+=((p_hat[i]-p[i])**2)/p[i]
+K=n*K
+print(K, chi)
+if K<chi:
+    print("гипотеза принимается")
+else:
+    print("гипотеза отвергается")
